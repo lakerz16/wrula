@@ -2,53 +2,89 @@
 <head>
   <meta charset="utf-8">
 
-  <title>My Parse App</title>
+  <title>WRULA</title>
   <meta name="description" content="My Parse App">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
+
 </head>
 
 <body>
   
   <div id="main">
-    <h1>You're ready to use Parse!</h1>
+    <h1>Storing some data!</h1>
+	
+	<div><br>IP: </div>
+    <div id="wIP">Overflow</div>
+    
+    <div><br>URL: </div>
+    <div id="wURL">Error</div>
+    
+    <div><br>Date &amp; Time (ms)</div>
+    <div id="wDateTime">Error</div>
+    
+    <div><br>Browser Type</div>
+    <div id="wBrowser">Error</div>
 
-    <p>Read the documentation and start building your JavaScript app:</p>
 
-    <ul>
-      <li><a href="https://www.parse.com/docs/js_guide">Parse JavaScript Guide</a></li>
-      <li><a href="https://www.parse.com/docs/js">Parse JavaScript API Documentation</a></li>
-    </ul>
-
-    <div style="display:none" class="error">
-      Looks like there was a problem saving the test object. Make sure you've set your application ID and javascript key correctly in the call to <code>Parse.initialize</code> in this file.
-    </div>
-
-    <div style="display:none" class="success">
-      <p>We've also just created your first object using the following code:</p>
-      
-        <code>
-          var TestObject = Parse.Object.extend("TestObject");<br/>
-          var testObject = new TestObject();<br/>
-          testObject.save({foo: "bar"});
-        </code>
-    </div>
+	<script type="application/javascript">
+		function getip(json){
+	    	document.getElementById("wIP").innerHTML = json.ip;
+	    	return json.ip;
+	    }
+	</script>
+	<script type="application/javascript" src="http://jsonip.appspot.com/?callback=getip"></script>
+    
+    <script type="text/javascript">
+    	function getURL() {
+			document.getElementById("wURL").innerHTML = document.URL;
+			return document.URL;
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function getDateTime() {
+			var dt = new Date().getTime();
+			document.getElementById("wDateTime").innerHTML = dt;
+			return dt;
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function getBrowser() {
+				var browser = navigator.appName;
+				document.getElementById("wBrowser").innerHTML = browser;
+				return browser;
+		}
+	</script>
+	
   </div>
 
   <script type="text/javascript">
     Parse.initialize("ansQXjRWRuBlpdckscQUbOsoiWdjmBK81svBmpib", "MLCrqkukA0bMLs2FaZq7RAEAGx3fzv3bv3emMG3c");
 	    
-	var TestObject = Parse.Object.extend("TestObject");
+	var TestObject = Parse.Object.extend("PageVisit");
 	var testObject = new TestObject();
-	testObject.save({foo: "bar"}, {
+	
+	try{
+		testObject.set("IP", getip());
+	} catch(err) {
+		testObject.set("IP", "Overflow");
+	}
+	testObject.set("URL", getURL());
+	testObject.set("DateTime", getDateTime());
+	testObject.set("Browser", getBrowser());
+	
+	testObject.save(null, {
 	  success: function(object) {
-	    alert("yay! it worked");
+	  	alert("done!");
 	  }
 	});
   </script>
+  
 </body>
 
 </html>
