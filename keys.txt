@@ -1,0 +1,18 @@
+App ID
+ansQXjRWRuBlpdckscQUbOsoiWdjmBK81svBmpib
+
+Client Key
+9N1QqvitVap2yUqKSzUntYays0DrJANBFWyY7FPq
+
+Javascript Key
+MLCrqkukA0bMLs2FaZq7RAEAGx3fzv3bv3emMG3c
+
+Windows Key
+VGPo9Wgu58EiP51ONucPuUvAdnCSzZ4xWfnmORZZ
+
+REST API Key
+wpjus1hDotGUx0LJOW6RpQ80IoZsbnjiWxyjho1Q
+
+Master Key
+exLhV7uBoVFK05UF8uxv1mi56yYORUssIT9Y2FIy
+
