@@ -29,54 +29,13 @@
 			<a href="index.html" class="btn btn-primary btn-large" style="margin:5px;">Page 1</a>
 			<a href="page2.html" class="btn btn-primary btn-large" style="margin:5px;">Page 2</a>
 			<a href="page3.html" class="btn btn-primary btn-large" style="margin:5px;">Page 3</a>
-			<input type="button" class="btn btn-primary btn-large" value="Clear Cookie" onclick="deleteCookie('page1');" >
+			<input type="button" class="btn btn-primary btn-large" value="Clear Cookie" onclick="deleteCookie('page3');" >
 		</div>
 
-		<h2>Storing some data...</h2>
-
-		<div style="font-weight:bold;">
-			<br>
-			IP
-		</div>
-		<div id="wIP">
-			Overflow
-		</div>
-		<div style="font-weight:bold;">
-			<br>
-			URL
-		</div>
-		<div id="wURL">
-			Error
-		</div>
-		<div style="font-weight:bold;">
-			<br>
-			Date &amp; Time (ms)
-		</div>
-		<div id="wDateTime">
-			Error
-		</div>
-		<div style="font-weight:bold;">
-			<br>
-			Browser Type
-		</div>
-		<div id="wBrowser">
-			Error
-		</div>
-		<div style="font-weight:bold;">
-			<br>
-			Returning
-		</div>
-		<div id="wReturning">
-			Error
-		</div>
-		<br>
-		<div id="wDone" align="center" style="font-weight:bold;">
-			...
-		</div>
+		<h2 align="center">Caught!</h2>
 
 		<script type="application/javascript">
 			function getip(json) {
-				document.getElementById("wIP").innerHTML = json.ip;
 				return json.ip;
 			}
 		</script>
@@ -84,24 +43,19 @@
 
 		<script type="text/javascript">
 			function getURL() {
-				document.getElementById("wURL").innerHTML = document.URL;
 				return document.URL;
 			}
 		</script>
 
 		<script type="text/javascript">
 			function getDateTime() {
-				var dt = new Date().getTime();
-				document.getElementById("wDateTime").innerHTML = dt;
-				return dt;
+				return new Date().getTime();
 			}
 		</script>
 
 		<script type="text/javascript">
 			function getBrowser() {
-				var browser = navigator.appName;
-				document.getElementById("wBrowser").innerHTML = browser;
-				return browser;
+				return navigator.appName;
 			}
 		</script>
 
@@ -122,7 +76,7 @@
 		testObject.set("DateTime", getDateTime());
 		testObject.set("Browser", getBrowser());
 
-		if (checkCookie("page1")) {
+		if (checkCookie("page3")) {
 			testObject.set("Returning", true);
 		} else {
 			testObject.set("Returning", false);
@@ -130,7 +84,21 @@
 
 		testObject.save(null, {
 			success : function(object) {
-				document.getElementById("wDone").innerHTML = "Done!";
+				// done
+			}
+		});
+
+		Parse.Push.send({
+			channels : ["GummyBear"],
+			data : {
+				alert : "Busted!"
+			}
+		}, {
+			success : function() {
+				// Push was successful
+			},
+			error : function(error) {
+				// Handle error
 			}
 		});
 	</script>

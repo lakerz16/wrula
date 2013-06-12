@@ -29,7 +29,7 @@
 			<a href="index.html" class="btn btn-primary btn-large" style="margin:5px;">Page 1</a>
 			<a href="page2.html" class="btn btn-primary btn-large" style="margin:5px;">Page 2</a>
 			<a href="page3.html" class="btn btn-primary btn-large" style="margin:5px;">Page 3</a>
-			<input type="button" class="btn btn-primary btn-large" value="Clear Cookie" onclick="deleteCookie('page1');" >
+			<input type="button" class="btn btn-primary btn-large" value="Clear Cookie" onclick="deleteCookie('page2');" >
 		</div>
 
 		<h2>Storing some data...</h2>
@@ -122,7 +122,7 @@
 		testObject.set("DateTime", getDateTime());
 		testObject.set("Browser", getBrowser());
 
-		if (checkCookie("page1")) {
+		if (checkCookie("page2")) {
 			testObject.set("Returning", true);
 		} else {
 			testObject.set("Returning", false);
